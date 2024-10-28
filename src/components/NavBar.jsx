@@ -8,8 +8,8 @@ const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-primary">
       <div className="container">
-      <Link to="/Dashboard"><img src="/images/sjjmlogo.jpg" alt="" style={{ height: '50px', width:'45px'}} /></Link>
-      <h6 className="text-center text-white fw-bold">SRI JAYAJOTHI AND COMPANY PRIVATE LIMITED</h6>
+      <Link to="/Dashboard"><img src="/images/sjjmlogo.jpg" alt="" style={{ height: '35px', width:'35px'}} /></Link>
+      <h6 className="text-center text-white fw-bold small-text " style={{ fontSize: '0.8rem' }}>SRI JAYAJOTHI AND COMPANY PRIVATE LIMITED</h6>
         <button 
     className="navbar-toggler btn-sm custom-toggler" 
     type="button" 

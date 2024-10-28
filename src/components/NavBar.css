@@ -1,9 +1,9 @@
 .custom-toggler {
-    padding: 0.1rem; /* Adjust this value to change the button's padding */
-    font-size: 0.2rem; /* Smaller font size */
+    padding: 0.01rem; /* Adjust this value to change the button's padding */
+    font-size: 0.02rem; /* Smaller font size */
 }
 
 .custom-toggler .navbar-toggler-icon {
-    width: 1.0rem; /* Adjust the width of the toggler icon */
-    height: 1.0rem; /* Adjust the height of the toggler icon */
+    width: .0rem; /* Adjust the width of the toggler icon */
+    height: .0rem; /* Adjust the height of the toggler icon */
 }
