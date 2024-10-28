@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* src/App.css */
+
+.btn-group {
+  margin-bottom: 1rem; /* Add margin to the button group */
+}
+
+.btn {
+  margin-right: 0.5rem; /* Add gap between buttons */
+  background-color: #007bff; /* Background color for inactive buttons */
+  color:#007bff; /* Text color for inactive buttons */
+  border: 1px solid #ccc; /* Border for inactive buttons */
+}
+
+.btn:hover {
+  background-color: #007bff; /* Slightly darker on hover for inactive buttons */
+}
+
+.btn.active {
+  background-color: #007bff; /* Change background color for active button */
+  color: #007bff; /* Change text color for active button */
+  border-color: #007bff; /* Match border color with background */
+}
