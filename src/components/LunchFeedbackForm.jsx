@@ -194,8 +194,8 @@ const LunchFeedbackForm = () => {
 
             {/* Rising */}
             <div className="card mb-3 border-secondary">
+             <div className="card-body">
               <img src="/images/rice.jpg" alt="rice" className="card-img-top" />
-              <div className="card-body">
               <label className="form-label " style={{ textTransform: "uppercase" }}><strong>How was the rice ? </strong>  
                 <p className='mt-1' style={{ fontSize: '0.9rem' }}>அரிசி சாதம் எவ்வாறு இருந்தது?</p> 
                 </label>
