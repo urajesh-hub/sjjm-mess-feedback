@@ -72,7 +72,7 @@ const App = () => {
                 <div className="card-body d-flex flex-column justify-content-around align-items-center">
 
                   {/* Company Image Card */}
-                  <div className="card mx-2" style={{ width: '25rem' }}>
+                  <div className="card mx-2" style={{ width: '20rem' }}>
                     <div className="card-body text-center">
                     <h5 className="fw-bold mb-3 text-primary">SRI JAYAJOTHI AND COMPANY PRIVATE LIMITED</h5>
                     <Link to="/Dashboard" className=" ">
