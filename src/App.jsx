@@ -1,23 +1,23 @@
-// src/App.js
-import React, { useState, useEffect } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import BreakfastFeedbackForm from './components/BreakfastFeedbackForm';
 import LunchFeedbackForm from './components/LunchFeedbackForm';
 import LunchVegNonVeg from './components/LunchVegNonVeg';
 import DinnerFeedbackForm from './components/DinnerFeedbackForm';
 import FeedbackList from './components/FeedbackList';
-import NavBar from './components/NavBar';
 import { breakfastMealType, lunchMealType, dinnerMealType } from './components/mealConfigs';
 import Dashboard from './components/Dashboard';
+import { Link } from 'react-router-dom';
 import NonVegFeedback from './components/NonVegFeedback';
 
 const App = () => {
-  const [activeMeal, setActiveMeal] = useState(null);
+  const navigate = useNavigate();
+    const [activeMeal, setActiveMeal] = useState(null);
   const [selectedMealType, setSelectedMealType] = useState('All');
   const [enabledButton, setEnabledButton] = useState('');
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  useEffect(() => {
+    useEffect(() => {
     const checkTimeForMeal = () => {
       const currentTime = new Date();
       const currentHour = currentTime.getHours();
@@ -43,6 +43,7 @@ const App = () => {
     const timer = setInterval(checkTimeForMeal, 60000); // Check every minute
     return () => clearInterval(timer); // Cleanup timer on component unmount
   }, []);
+  
 
   const handleLunchClick = () => {
     const today = new Date();
@@ -51,54 +52,76 @@ const App = () => {
     if (day === 'Wednesday') {
       navigate('/lunch-veg-nonveg');
     } else {
-      setActiveMeal('lunch');
+      navigate('/lunch-feedback'); // Navigate to LunchFeedbackForm if not Wednesday
     }
   };
 
   return (
     <div>
-      <NavBar />
+      {/* <NavBar /> */}
       <div className="container my-4">
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
-          
+
           <Route path="/" element={
             <>
-              <h5 className='text-center fw-bold'>MESS FEEDBACK SURVEY</h5>
-              <div className="mt-3 d-flex justify-content-center">
-                <button 
-                  className="btn btn-primary btn-sm fw-bold me-2 mt-2" 
-                  onClick={() => setActiveMeal('breakfast')} 
-                  disabled={enabledButton !== 'breakfast'}
-                >
-                  BREAKFAST
-                </button>
-                <button 
-                  className="btn btn-primary btn-sm fw-bold me-2 mt-2" 
-                  onClick={handleLunchClick} 
-                  disabled={enabledButton !== 'lunch'}
-                >
-                  LUNCH
-                </button>
-                <button 
-                  className="btn btn-primary btn-sm fw-bold mt-2" 
-                  onClick={() => setActiveMeal('dinner')} 
-                  disabled={enabledButton !== 'dinner'}
-                >
-                  DINNER
-                </button>
-              </div>
+             
 
-              {activeMeal === 'breakfast' && <BreakfastFeedbackForm mealType={breakfastMealType} />}
-              {activeMeal === 'lunch' && <LunchFeedbackForm mealType={lunchMealType} />}
-              {activeMeal === 'dinner' && <DinnerFeedbackForm mealType={dinnerMealType} />}
+              {/* Main Card containing Company Logo and Buttons */}
+              <div className="card mt-4">
+                <div className="card-body d-flex flex-column justify-content-around align-items-center">
+
+                  {/* Company Image Card */}
+                  <div className="card mx-2" style={{ width: '25rem' }}>
+                    <div className="card-body text-center">
+                    <h5 className="fw-bold mb-3 text-primary">SRI JAYAJOTHI AND COMPANY PRIVATE LIMITED</h5>
+                    <Link to="/Dashboard" className=" ">
+                    <img src="images/sjjmlogo.jpg" alt="Company Logo" className="img-fluid" />
+                    </Link>
+                      
+                     
+
+                      {/* Meal Selection Buttons */}
+                      <h6 className="text-center fw-bold mt-3">MESS FEEDBACK SURVEY</h6>
+                      <div className=" card-body d-flex flex-column text-center">
+                        <button 
+                          className="btn btn-primary fw-bold mb-2 " 
+                          onClick={() => navigate('/breakfast-feedback')}
+                          disabled={enabledButton !== 'breakfast'}
+                        >
+                          BREAKFAST
+                        </button>
+                        <button 
+                          className="btn btn-primary fw-bold mb-2" 
+                          onClick={handleLunchClick}
+                          disabled={enabledButton !== 'lunch'}
+                        >
+                          LUNCH
+                        </button>
+                        <button 
+                          className="btn btn-primary fw-bold" 
+                          onClick={() => navigate('/dinner-feedback')}
+                          disabled={enabledButton !== 'dinner'}
+                        >
+                          DINNER
+                        </button>
+                      </div>  
+                    </div>
+                  </div>
+                </div>
+              </div>
             </>
           } />
+
+          {/* Separate routes for feedback forms */}
+          <Route path="/breakfast-feedback" element={<BreakfastFeedbackForm mealType={breakfastMealType} />} />
+          <Route path="/lunch-feedback" element={<LunchFeedbackForm mealType={lunchMealType} />} />
+          <Route path="/dinner-feedback" element={<DinnerFeedbackForm mealType={dinnerMealType} />} />
 
           <Route path="/lunch-veg-nonveg" element={<LunchVegNonVeg />} />
           <Route path="/non-veg-feedback" element={<NonVegFeedback />} />
           <Route path="/wed-veg-lunch" element={<LunchFeedbackForm />} />
-          <Route path="/feedback-list" element={<FeedbackList mealType={selectedMealType} />} />
+          <Route path="/feedback-list" element={<FeedbackList />} />
         </Routes>
       </div>
     </div>
@@ -106,4 +129,3 @@ const App = () => {
 };
 
 export default App;
-
