@@ -9,7 +9,7 @@ import FeedbackList from './components/FeedbackList';
 import NavBar from './components/NavBar';
 import { breakfastMealType, lunchMealType, dinnerMealType } from './components/mealConfigs';
 import Dashboard from './components/Dashboard';
-import NonVegFeedback from './components/NonvegFeedback';
+import NonVegFeedback from './components/NonVegFeedback';
 
 const App = () => {
   const [activeMeal, setActiveMeal] = useState(null);
