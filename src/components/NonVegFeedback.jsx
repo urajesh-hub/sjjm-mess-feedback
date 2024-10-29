@@ -105,9 +105,9 @@ const NonVegFeedback = () => {
             {/* Category */}
             <div className="card mb-3 border-secondary">
               <div className="card-body">
-              <img src="/images/non-veg/non-veg-mutton1.jpg" alt="mutton" className="card-img-top mb-2" />
-              <label className="form-label " style={{ textTransform: "uppercase" }}><strong>How did the mutton gravy taste ? </strong>  
-                <p className='mt-1' style={{ fontSize: '0.9rem' }}>ஆட்டிறைச்சி குழம்பின் சுவை எவ்வாறு இருந்தது?</p> 
+              <img src="/images/non-veg/non-category.jpg" alt="mutton" className="card-img-top mb-2" />
+              <label className="form-label " style={{ textTransform: "uppercase" }}><strong>VISTORS CATEGORY </strong>  
+             
                 </label>
                
                 {categories.map((dish, index) => (
