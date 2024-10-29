@@ -68,7 +68,7 @@ const App = () => {
              
 
               {/* Main Card containing Company Logo and Buttons */}
-              <div className="card mt-4 bg-primary">
+              <div className="card mt-4 bg-light">
                 <div className="card-body d-flex flex-column justify-content-around align-items-center">
 
                   {/* Company Image Card */}
