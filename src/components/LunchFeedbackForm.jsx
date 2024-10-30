@@ -1,4 +1,5 @@
 import React, { useState,useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { db } from './firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore';
 import './StarRating.css';
@@ -19,6 +20,7 @@ const LunchFeedbackForm = () => {
   });
 
   const [currentDateTime, setCurrentDateTime] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Function to format the current date and time
@@ -69,6 +71,9 @@ const LunchFeedbackForm = () => {
       const currentDate = new Date();
       await addDoc(collection(db, 'lunchFeedback'), { ...formData, date: currentDate });
       alert('lunchFeedback feedback submitted successfully');
+
+      // Navigate to home page after successful submission
+      navigate('/');
       setFormData({
         
         date: '',
