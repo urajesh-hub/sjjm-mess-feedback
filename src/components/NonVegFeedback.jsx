@@ -193,8 +193,8 @@ const NonVegFeedback = () => {
             <div className="card mb-3 border-secondary">
               <div className="card-body">
               <img src="/images/non-veg/non-veg-mutton1.jpg" alt="mutton" className="card-img-top mb-2" />
-              <label className="form-label " style={{ textTransform: "uppercase" }}><strong>How did the mutton gravy taste ? </strong>  
-                <p className='mt-1' style={{ fontSize: '0.9rem' }}>ஆட்டிறைச்சி குழம்பின் சுவை எவ்வாறு இருந்தது?</p> 
+              <label className="form-label " style={{ textTransform: "uppercase" }}><strong>How did the Non-Veg gravy (mutton, Chicken, egg) taste ? </strong>  
+                <p className='mt-1' style={{ fontSize: '0.9rem' }}>அசைவ குழம்பின் (மட்டன், சிக்கன், முட்டை) சுவை எவ்வாறு இருந்தது ?</p> 
                 </label>
                
                 {mutton.map((dish, index) => (
@@ -217,11 +217,11 @@ const NonVegFeedback = () => {
             </div>
 
             {/* Chicken Gravey */}
-            <div className="card mb-3 border-secondary">
+            {/* <div className="card mb-3 border-secondary">
               <div className="card-body">
               <img src="/images/non-veg/non-veg-chicken1.jpg" alt="chicken" className="card-img-top mb-2" />
               <label className="form-label " style={{ textTransform: "uppercase" }}><strong>How did the chicken gravey taste? ? </strong>  
-                <p className='mt-1' style={{ fontSize: '0.9rem' }}>கோழி இறைச்சி குழம்பின் சுவை எவ்வாறு இருந்தது??</p> 
+                <p className='mt-1' style={{ fontSize: '0.9rem' }}>கோழி இறைச்சி குழம்பின் சுவை எவ்வாறு இருந்தது?</p> 
                 </label>
                
                 {chicken.map((dish, index) => (
@@ -241,10 +241,10 @@ const NonVegFeedback = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
 
             {/* Egg Gravey */}
-            <div className="card mb-3 border-secondary">
+            {/* <div className="card mb-3 border-secondary">
               <div className="card-body">
               <img src="/images/non-veg/non-veg-egg1.jpg" alt="egg" className="card-img-top mb-2" />
               <label className="form-label " style={{ textTransform: "uppercase" }}><strong>How did the egg gravey taste ?  </strong>  
@@ -268,7 +268,7 @@ const NonVegFeedback = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
 
 
             {/* Main Dishes Ratings */}
