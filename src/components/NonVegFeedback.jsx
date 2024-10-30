@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { db } from './firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore';
 import './StarRating.css';
@@ -18,6 +19,7 @@ const NonVegFeedback = () => {
   });
 
   const [currentDateTime, setCurrentDateTime] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Function to format the current date and time
@@ -60,6 +62,8 @@ const NonVegFeedback = () => {
       const currentDate = new Date();
       await addDoc(collection(db, 'nonVegFeedback'), { ...formData, date: currentDate });
       alert('Non-Vegetarian feedback submitted successfully');
+       // Navigate to home page after successful submission
+       navigate('/');
       setFormData({
         categories: [],
         rise:[],
