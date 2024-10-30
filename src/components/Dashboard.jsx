@@ -1,5 +1,3 @@
-// src/components/Dashboard.js
-
 import React, { useEffect, useState } from "react";
 import { db } from "./firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
@@ -10,6 +8,7 @@ const Dashboard = () => {
     breakfastCount: 0,
     lunchCount: 0,
     dinnerCount: 0,
+    nonVegCount: 0, // Non-Veg feedback count
   });
 
   useEffect(() => {
@@ -18,25 +17,39 @@ const Dashboard = () => {
         Breakfast: "breakfastFeedback",
         Lunch: "lunchFeedback",
         Dinner: "dinnerFeedback",
+        NonVeg: "nonVegFeedback", // Keeping this consistent
       };
+    
       const updatedSummary = {
         breakfastCount: 0,
         lunchCount: 0,
         dinnerCount: 0,
+        nonVegCount: 0, // This should match the key used below
       };
-
+    
       for (const [mealType, collectionName] of Object.entries(mealTypes)) {
-        const feedbackCollection = collection(db, collectionName);
-        const feedbackSnapshot = await getDocs(feedbackCollection);
-
-        // Set the count based on the length of fetched documents
-        updatedSummary[`${mealType.toLowerCase()}Count`] =
-          feedbackSnapshot.docs.length;
+        try {
+          const feedbackCollection = collection(db, collectionName);
+          const feedbackSnapshot = await getDocs(feedbackCollection);
+          
+          console.log(`${mealType} Feedback Count:`, feedbackSnapshot.docs.length);
+    
+          // Update the count in the summary object using the correct key
+          updatedSummary[`${mealType.toLowerCase()}Count`] = feedbackSnapshot.docs.length;
+    
+          // For Non-Veg, explicitly set the count
+          if (mealType === "NonVeg") {
+            updatedSummary.nonVegCount = feedbackSnapshot.docs.length;
+          }
+        } catch (error) {
+          console.error(`Error fetching ${mealType} feedback:`, error);
+        }
       }
-
-      setSummary(updatedSummary);
+    
+      console.log("Updated Summary:", updatedSummary);
+      setSummary(updatedSummary); // Set the updated state here
     };
-
+    
     fetchData();
   }, []);
 
@@ -47,20 +60,14 @@ const Dashboard = () => {
           DASHBOARD
         </h6>
         <p className="text-center text-success fw-bold">
-          OVER VIEWS OF FEEDBACK ENTRIES
+          OVERVIEWS OF FEEDBACK ENTRIES
         </p>
 
         <div className="dashboard-cards d-flex justify-content-around flex-wrap">
           {/* Breakfast Summary */}
           <div className="m-2" style={{ width: "18rem" }}>
-            <Link
-              to="/feedback-list"
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <div
-                className="card text-center"
-                style={{ borderRadius: 10, overflow: "hidden" }}
-              >
+            <Link to="/feedback-list" style={{ textDecoration: "none", color: "inherit" }}>
+              <div className="card text-center" style={{ borderRadius: 10, overflow: "hidden" }}>
                 <div className="card-body bg-danger text-white">
                   <h6 className="card-title">BREAKFAST</h6>
                   <p className="card-text fw-bold">
@@ -73,14 +80,8 @@ const Dashboard = () => {
 
           {/* Lunch Summary */}
           <div className="m-2" style={{ width: "18rem" }}>
-            <Link
-              to="/feedback-list"
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <div
-                className="card text-center"
-                style={{ borderRadius: 10, overflow: "hidden" }}
-              >
+            <Link to="/feedback-list" style={{ textDecoration: "none", color: "inherit" }}>
+              <div className="card text-center" style={{ borderRadius: 10, overflow: "hidden" }}>
                 <div className="card-body bg-success text-white">
                   <h6 className="card-title">LUNCH</h6>
                   <p className="card-text fw-bold">
@@ -93,14 +94,8 @@ const Dashboard = () => {
 
           {/* Dinner Summary */}
           <div className="m-2" style={{ width: "18rem" }}>
-            <Link
-              to="/feedback-list"
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <div
-                className="card text-center"
-                style={{ borderRadius: 10, overflow: "hidden" }}
-              >
+            <Link to="/feedback-list" style={{ textDecoration: "none", color: "inherit" }}>
+              <div className="card text-center" style={{ borderRadius: 10, overflow: "hidden" }}>
                 <div className="card-body bg-primary text-white">
                   <h6 className="card-title">DINNER</h6>
                   <p className="card-text fw-bold">
@@ -110,11 +105,25 @@ const Dashboard = () => {
               </div>
             </Link>
           </div>
+
+          {/* Non-Veg Summary */}
+          <div className="m-2" style={{ width: "18rem" }}>
+            <Link to="/feedback-list" style={{ textDecoration: "none", color: "inherit" }}>
+              <div className="card text-center" style={{ borderRadius: 10, overflow: "hidden" }}>
+                <div className="card-body bg-warning text-white">
+                  <h6 className="card-title">NON-VEG</h6>
+                  <p className="card-text fw-bold">
+                    TOTAL FEEDBACKS: {summary.nonVegCount}
+                  </p>
+                </div>
+              </div>
+            </Link>
+          </div>
         </div>
 
         <div className="d-flex justify-content-center">
-          <Link to="/feedback-form">
-            <button className="btn btn-warning fw-bold me-2 mt-2 mb-2">
+          <Link to="/">
+            <button className="btn btn-dark fw-bold text-white me-2 mt-2 mb-2">
               GO TO FEEDBACK FORM
             </button>
           </Link>

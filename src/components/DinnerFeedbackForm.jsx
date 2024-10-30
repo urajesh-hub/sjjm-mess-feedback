@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { db } from './firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore';
 import './StarRating.css';
 
 const DinnerFeedbackForm = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    date: '',
+    
+    
     categories: [],
     hospitality: '',
     mainDish: [],
@@ -17,6 +17,29 @@ const DinnerFeedbackForm = () => {
     sideDishComment: '',
     additionalComments: ''
   });
+
+  const [currentDateTime, setCurrentDateTime] = useState('');
+
+  useEffect(() => {
+    // Function to format the current date and time
+    const formatDateTime = () => {
+      const date = new Date();
+      const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+      const day = dayNames[date.getDay()];
+      const dayFormatted = String(date.getDate()).padStart(2, '0');
+      const monthFormatted = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+      const year = date.getFullYear();
+      const hoursFormatted = String(date.getHours()).padStart(2, '0');
+      const minutesFormatted = String(date.getMinutes()).padStart(2, '0');
+      const secondsFormatted = String(date.getSeconds()).padStart(2, '0');
+
+      return `${dayFormatted}-${monthFormatted}-${year} ${hoursFormatted}:${minutesFormatted}:${secondsFormatted} ${day}`;
+    };
+
+    // Set the current date and time when the component mounts
+    setCurrentDateTime(formatDateTime());
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,7 +66,8 @@ const DinnerFeedbackForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await addDoc(collection(db, 'dinnerFeedback'), { ...formData, date: new Date(formData.date) });
+      const currentDate = new Date();
+      await addDoc(collection(db, 'dinnerFeedback'), { ...formData, date: currentDate });
       alert('dinnerFeedback feedback submitted successfully');
       setFormData({
         name: '',
@@ -79,38 +103,11 @@ const DinnerFeedbackForm = () => {
         </div>
         <div className="card-body">
           <form onSubmit={handleSubmit}>
-            <div className="card mb-3 border-secondary">
-              <div className="card-body">
-                
-                <label className="form-label"><strong>1. Name</strong></label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            </div>
+            {/* Display Current Date and Time in the desired format */}
+          <h6 className="text-center fw-bold bg-light text-dark">{currentDateTime}</h6>
+            
 
-            <div className="card mb-3 border-secondary">
-              <div className="card-body">
-                <label htmlFor="date" className="form-label"><strong>2. Date</strong></label>
-                
-                <input
-                  type="date"
-                  className="form-control"
-                  id="date"
-                  name="date"
-                  value={formData.date}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            </div>
-
+           
             <div className="card mb-3 border-secondary">
             <img src="/images/category.jpg" alt="Category" className="card-img-top" />
               <div className="card-body">

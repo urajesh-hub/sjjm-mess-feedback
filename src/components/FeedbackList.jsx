@@ -17,14 +17,15 @@ const FeedbackList = () => {
     Breakfast: { label: 'Breakfast', collectionName: 'breakfastFeedback' },
     Lunch: { label: 'Lunch', collectionName: 'lunchFeedback' },
     Dinner: { label: 'Dinner', collectionName: 'dinnerFeedback' },
+    NonVegFeedback: { label: 'Non-Veg', collectionName: 'nonVegFeedback' }
+    
   };
 
   useEffect(() => {
     const fetchFeedbacks = async () => {
       let allFeedbacks = [];
-
+  
       if (selectedMeal === 'All') {
-        // Fetch feedbacks from all meal collections
         for (const mealKey in mealTypes) {
           const feedbackCollection = collection(db, mealTypes[mealKey].collectionName);
           const feedbackSnapshot = await getDocs(feedbackCollection);
@@ -33,16 +34,16 @@ const FeedbackList = () => {
           );
         }
       } else {
-        // Fetch feedbacks from the selected meal collection only
         const feedbackCollection = collection(db, mealTypes[selectedMeal].collectionName);
         const feedbackSnapshot = await getDocs(feedbackCollection);
         allFeedbacks = feedbackSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data(), mealType: mealTypes[selectedMeal].label }));
       }
       setFeedbacks(allFeedbacks);
     };
-
+  
     fetchFeedbacks();
   }, [selectedMeal]);
+
 
   // Function to handle Excel export
   const handleDownloadExcel = () => {
@@ -73,6 +74,7 @@ const FeedbackList = () => {
           <option value="Breakfast">Breakfast</option>
           <option value="Lunch">Lunch</option>
           <option value="Dinner">Dinner</option>
+          <option value="NonVegFeedback">Non-Veg</option>          
         </select>
       </div>
 
