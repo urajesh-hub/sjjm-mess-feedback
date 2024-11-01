@@ -330,7 +330,7 @@ navigate('/')
             </div>
           </form>
         </div>
-        <label htmlFor="">Home</label>
+        
       </div>
     </div>
   );
