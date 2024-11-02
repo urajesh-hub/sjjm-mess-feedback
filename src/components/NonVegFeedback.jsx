@@ -67,7 +67,7 @@ const NonVegFeedback = () => {
     try {
       const currentDate = new Date();
       await addDoc(collection(db, 'nonVegFeedback'), { ...formData, date: currentDate });
-      alert('Non-Vegetarian feedback submitted successfully');
+      alert('Thank You- Feedback Fubmitted Successfully');
        // Navigate to home page after successful submission
        navigate('/');
       setFormData({
@@ -109,7 +109,7 @@ const NonVegFeedback = () => {
         </div>
         <div className="card-body">
           {/* Display Current Date and Time in the desired format */}
-          <h6 className="text-center fw-bold bg-light text-dark">{currentDateTime}</h6>
+          <h6 className="text-center fw-bold text-danger">{currentDateTime}</h6>
           <form onSubmit={handleSubmit}>
 
             

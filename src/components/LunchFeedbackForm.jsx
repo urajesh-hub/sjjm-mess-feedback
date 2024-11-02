@@ -79,7 +79,7 @@ import './StarRating.css';
     try {
       const currentDate = new Date();
       await addDoc(collection(db, 'lunchFeedback'), { ...formData, date: currentDate });
-      alert('Lunch feedback submitted successfully');
+      alert('Thank You- Feedback Fubmitted Successfully');
 
       // Navigate to home page after successful submission
       navigate('/');
@@ -183,7 +183,7 @@ import './StarRating.css';
         </div>
         <div className="card-body">
           {/* Display Current Date and Time in the desired format */}
-          <h6 className="text-center fw-bold bg-light text-dark">{currentDateTime}</h6>
+          <h6 className="text-center fw-bold text-primary">{currentDateTime}</h6>
 
           <form onSubmit={handleSubmit}>
 

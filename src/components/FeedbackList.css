@@ -1,0 +1,23 @@
+.feedback-list {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.feedback-list th,
+.feedback-list td {
+  padding: px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.feedback-list thead {
+  background-color: #0d6efd;
+  color: white;
+  white-space: nowrap;
+
+
+}
+
+.feedback-list tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}

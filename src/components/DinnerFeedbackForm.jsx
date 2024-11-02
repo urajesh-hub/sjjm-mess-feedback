@@ -10,7 +10,7 @@ const DinnerFeedbackForm = () => {
     
 
     mealType: 'DINNER',
-    categories: [],
+    categories: '',
     hospitality: '',
     mainDish: [],
     mainDishRating: 1,
@@ -45,24 +45,22 @@ const DinnerFeedbackForm = () => {
     setCurrentDateTime(formatDateTime());
   }, []);
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   if (name === 'categories') {
-  //     setFormData({ ...formData, categories: [value] });
-  //   } else if (name === 'mainDish' || name === 'sideDish') {
-  //     const updatedDishes = formData[name].includes(value)
-  //       ? formData[name].filter(dish => dish !== value)
-  //       : [...formData[name], value];
-  //     setFormData({ ...formData, [name]: updatedDishes });
-  //   } else {
-  //     setFormData({ ...formData, [name]: value });
-  //   }
-  // };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+     if (name === 'mainDish' || name === 'sideDish') {
+      const updatedDishes = formData[name].includes(value)
+        ? formData[name].filter(dish => dish !== value)
+        : [...formData[name], value];
+      setFormData({ ...formData, [name]: updatedDishes });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
+
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData({ ...formData, [name]: value });
+  // };
 
   const handleStarRating = (dishType, rating) => {
     if (dishType === 'main') {
@@ -77,14 +75,14 @@ const DinnerFeedbackForm = () => {
     try {
       const currentDate = new Date();
       await addDoc(collection(db, 'dinnerFeedback'), { ...formData, date: currentDate });
-      alert('dinnerFeedback feedback submitted successfully');
+      alert('Thank You- Feedback Fubmitted Successfully');
 
       // Navigate to home page after successful submission
       navigate('/');
       setFormData({
         name: '',
         date: '',
-        categories: [],
+        categories: '',
         hospitality: '',
         mainDish: [],
         mainDishRating: 1,
@@ -116,7 +114,7 @@ const DinnerFeedbackForm = () => {
         <div className="card-body">
           <form onSubmit={handleSubmit}>
             {/* Display Current Date and Time in the desired format */}
-            <h6 className="text-center fw-bold bg-light text-dark">{currentDateTime}</h6>
+            <h6 className="text-center fw-bold  text-primary">{currentDateTime}</h6>
 
 
             {/*Category*/}

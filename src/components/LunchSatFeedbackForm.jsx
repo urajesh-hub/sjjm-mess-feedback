@@ -63,7 +63,7 @@ const LunchSatFeedbackForm = () => {
     try {
       const currentDate = new Date();
       await addDoc(collection(db, 'LunchSatFeedbackForm'), { ...formData, date: currentDate });
-      alert('Thank you- Lunch feedback submitted successfully');
+      alert('Thank You- Feedback Fubmitted Successfully');
       setFormData({
         categories: '',
         brinji: [],
@@ -96,7 +96,7 @@ const LunchSatFeedbackForm = () => {
           <h6 className="card-title mb-0 text-center fw-bold">SATURDAY LUNCH FEEDBACK FORM</h6>
         </div>
         <div className="card-body">
-          <h6 className="text-center fw-bold bg-light text-dark">{currentDateTime}</h6>
+          <h6 className="text-center fw-bold text-primary">{currentDateTime}</h6>
           <form onSubmit={handleSubmit}>
             {/* Category */}
             <div className="card mb-3 border-secondary">

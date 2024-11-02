@@ -13,9 +13,9 @@ const BreakfastFeedbackForm = () => {
     date: '',
     categories: '',
     hospitality: '',
-    mainDish: [],
+    mainDish: '',
     mainDishRating: 1,
-    sideDish: [],
+    sideDish: '',
     sideDishRating: 1,
     cleanliness: 1,
     sideDishComment: '',
@@ -46,24 +46,22 @@ const navigate=useNavigate()
     setCurrentDateTime(formatDateTime());
   }, []);
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   if (name === 'categories') {
-  //     setFormData({ ...formData, categories: [value] });
-  //   } else if (name === 'mainDish' || name === 'sideDish') {
-  //     const updatedDishes = formData[name].includes(value)
-  //       ? formData[name].filter(dish => dish !== value)
-  //       : [...formData[name], value];
-  //     setFormData({ ...formData, [name]: updatedDishes });
-  //   } else {
-  //     setFormData({ ...formData, [name]: value });
-  //   }
-  // };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+     if (name === 'mainDish' || name === 'sideDish') {
+      const updatedDishes = formData[name].includes(value)
+        ? formData[name].filter(dish => dish !== value)
+        : [...formData[name], value];
+      setFormData({ ...formData, [name]: updatedDishes });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
+
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData({ ...formData, [name]: value });
+  // };
 
   
   const handleStarRating = (dishType, rating) => {
@@ -79,16 +77,16 @@ const navigate=useNavigate()
     try {
       const currentDate = new Date();
       await addDoc(collection(db, 'breakfastFeedback'), { ...formData, date: currentDate });
-      alert('Breakfast feedback submitted successfully');
+      alert('Thank You- Feedback Fubmitted Successfully');
 navigate('/')
       setFormData({
 
         date: '',
         categories: '',
         hospitality: '',
-        mainDish: [],
+        mainDish: '',
         mainDishRating: 1,
-        sideDish: [],
+        sideDish: '',
         sideDishRating: 1,
         cleanliness: 1,
         sideDishComment: '',
@@ -119,7 +117,7 @@ navigate('/')
         </div>
         <div className="card-body">
           {/* Display Current Date and Time in the desired format */}
-          <h6 className="text-center fw-bold bg-light text-dark">{currentDateTime}</h6>
+          <h6 className="text-center fw-bold  text-primary">{currentDateTime}</h6>
           <form onSubmit={handleSubmit}>
 
             {/*Category*/}

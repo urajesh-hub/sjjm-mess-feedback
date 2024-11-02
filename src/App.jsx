@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import BreakfastFeedbackForm from './components/BreakfastFeedbackForm';
 import LunchFeedbackForm from './components/LunchFeedbackForm';
@@ -14,12 +14,12 @@ import LunchSatFeedbackForm from './components/LunchSatFeedbackForm';
 
 const App = () => {
   const navigate = useNavigate();
-    const [activeMeal, setActiveMeal] = useState(null);
+  const [activeMeal, setActiveMeal] = useState(null);
   const [selectedMealType, setSelectedMealType] = useState('All');
   const [enabledButton, setEnabledButton] = useState('');
 
 
-    useEffect(() => {
+  useEffect(() => {
     const checkTimeForMeal = () => {
       const currentTime = new Date();
       const currentHour = currentTime.getHours();
@@ -45,16 +45,16 @@ const App = () => {
     const timer = setInterval(checkTimeForMeal, 60000); // Check every minute
     return () => clearInterval(timer); // Cleanup timer on component unmount
   }, []);
-  
+
 
   const handleLunchClick = () => {
     const today = new Date();
     const day = today.toLocaleString('en-IN', { weekday: 'long' });
-    
+
     if (day === 'Wednesday') {
       navigate('/lunch-veg-nonveg');
-    } 
-    else if (day === 'Saturday'){
+    }
+    else if (day === 'Saturday') {
       navigate('/lunch-sat-veg'); // Navigate to LunchFeedbackForm if Satuday
     }
     else {
@@ -65,13 +65,13 @@ const App = () => {
   return (
     <div>
       {/* <NavBar /> */}
-      <div className="container my-4">
+      <div className="container-fluid my-4">
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
 
           <Route path="/" element={
             <>
-             
+
 
               {/* Main Card containing Company Logo and Buttons */}
               <div className="card mt-4 bg-primary bg-opacity-10">
@@ -80,38 +80,38 @@ const App = () => {
                   {/* Company Image Card */}
                   <div className="card mx-2" style={{ width: '18rem' }}>
                     <div className="card-body text-center">
-                    <h5 className="fw-bold mb-3 text-primary">SRI JAYAJOTHI AND COMPANY PRIVATE LIMITED</h5>
-                    <Link to="/Dashboard" className=" ">
-                    <img src="images/sjjmlogo.jpg" alt="Company Logo" className="img-fluid" />
-                    </Link>
-                      
-                     
+                      <h5 className="fw-bold mb-3 text-primary">SRI JAYAJOTHI AND COMPANY PRIVATE LIMITED</h5>
+                      <Link to="/Dashboard" className=" ">
+                        <img src="images/sjjmlogo.jpg" alt="Company Logo" className="img-fluid" />
+                      </Link>
+
+
 
                       {/* Meal Selection Buttons */}
                       <h6 className="text-center fw-bold mt-3">MESS FEEDBACK SURVEY</h6>
                       <div className=" card-body d-flex flex-column text-center">
-                        <button 
-                          className="btn btn-primary fw-bold mb-2 " 
+                        <button
+                          className="btn btn-primary fw-bold mb-2 "
                           onClick={() => navigate('/breakfast-feedback')}
                           disabled={enabledButton !== 'breakfast'}
                         >
                           BREAKFAST
                         </button>
-                        <button 
-                          className="btn btn-primary fw-bold mb-2" 
+                        <button
+                          className="btn btn-primary fw-bold mb-2"
                           onClick={handleLunchClick}
                           disabled={enabledButton !== 'lunch'}
                         >
                           LUNCH
                         </button>
-                        <button 
-                          className="btn btn-primary fw-bold" 
+                        <button
+                          className="btn btn-primary fw-bold"
                           onClick={() => navigate('/dinner-feedback')}
                           disabled={enabledButton !== 'dinner'}
                         >
                           DINNER
                         </button>
-                      </div>  
+                      </div>
                     </div>
                   </div>
                 </div>
