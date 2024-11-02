@@ -9,9 +9,9 @@ import './StarRating.css';
 const BreakfastFeedbackForm = () => {
  
   const [formData, setFormData] = useState({
-
+    mealType: 'BREAKFAST',
     date: '',
-    categories: [],
+    categories: '',
     hospitality: '',
     mainDish: [],
     mainDishRating: 1,
@@ -46,20 +46,26 @@ const navigate=useNavigate()
     setCurrentDateTime(formatDateTime());
   }, []);
 
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   if (name === 'categories') {
+  //     setFormData({ ...formData, categories: [value] });
+  //   } else if (name === 'mainDish' || name === 'sideDish') {
+  //     const updatedDishes = formData[name].includes(value)
+  //       ? formData[name].filter(dish => dish !== value)
+  //       : [...formData[name], value];
+  //     setFormData({ ...formData, [name]: updatedDishes });
+  //   } else {
+  //     setFormData({ ...formData, [name]: value });
+  //   }
+  // };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'categories') {
-      setFormData({ ...formData, categories: [value] });
-    } else if (name === 'mainDish' || name === 'sideDish') {
-      const updatedDishes = formData[name].includes(value)
-        ? formData[name].filter(dish => dish !== value)
-        : [...formData[name], value];
-      setFormData({ ...formData, [name]: updatedDishes });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+    setFormData({ ...formData, [name]: value });
   };
 
+  
   const handleStarRating = (dishType, rating) => {
     if (dishType === 'main') {
       setFormData({ ...formData, mainDishRating: rating });
@@ -78,7 +84,7 @@ navigate('/')
       setFormData({
 
         date: '',
-        categories: [],
+        categories: '',
         hospitality: '',
         mainDish: [],
         mainDishRating: 1,
@@ -94,6 +100,8 @@ navigate('/')
       alert('There was an error submitting your feedback.');
     }
   };
+
+
 
   // Options
   const mainDishes = ['APPAM- ஆப்பம்', 'PURI- பூரி', 'DOSA- தோசை', 'WHEAT DOSA- கோதுமை தோசை', 'IDLY- இட்லி', 'WHITE PONGAL- வெண் பொங்கல்'];
@@ -305,6 +313,7 @@ navigate('/')
                 />
               </div>
             </div>
+            
 
             {/*additinal Commands */}
             <div className="card mb-3 border-secondary">

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { db } from './firebaseConfig';
@@ -8,7 +9,7 @@ const DinnerFeedbackForm = () => {
   const [formData, setFormData] = useState({
     
 
-
+    mealType: 'DINNER',
     categories: [],
     hospitality: '',
     mainDish: [],
@@ -44,18 +45,23 @@ const DinnerFeedbackForm = () => {
     setCurrentDateTime(formatDateTime());
   }, []);
 
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   if (name === 'categories') {
+  //     setFormData({ ...formData, categories: [value] });
+  //   } else if (name === 'mainDish' || name === 'sideDish') {
+  //     const updatedDishes = formData[name].includes(value)
+  //       ? formData[name].filter(dish => dish !== value)
+  //       : [...formData[name], value];
+  //     setFormData({ ...formData, [name]: updatedDishes });
+  //   } else {
+  //     setFormData({ ...formData, [name]: value });
+  //   }
+  // };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'categories') {
-      setFormData({ ...formData, categories: [value] });
-    } else if (name === 'mainDish' || name === 'sideDish') {
-      const updatedDishes = formData[name].includes(value)
-        ? formData[name].filter(dish => dish !== value)
-        : [...formData[name], value];
-      setFormData({ ...formData, [name]: updatedDishes });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleStarRating = (dishType, rating) => {

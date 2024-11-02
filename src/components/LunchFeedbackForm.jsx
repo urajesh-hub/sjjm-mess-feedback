@@ -4,20 +4,45 @@ import { db } from './firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore';
 import './StarRating.css';
 
-const LunchFeedbackForm = () => {
+// const LunchFeedbackForm = () => {
+//   const [formData, setFormData] = useState({
+//     mealType: 'VEG',
+//     date: '',
+//     categories: [],
+//     hospitality: '',
+//     rice: [],
+//         gravy: [],
+//         kuttu: [],
+//         poriyal: [],
+//         rasam: [],
+//         more: [],
+//         payasam: [],
+//         appalam: [],
+//         lunch: [],
+//         cleanlinessOptions:[],
+//     sideDishComment: '',
+//     additionalComments: ''
+//   });
+
+  const LunchFeedbackForm = () => {
   const [formData, setFormData] = useState({
-   
+    mealType: 'VEG',
     date: '',
-    categories: [],
+    categories: '',
     hospitality: '',
-    mainDish: [],
-    mainDishRating: 1,
-    sideDish: [],
-    sideDishRating: 1,
-    cleanliness: 1,
-    sideDishComment: '',
+    rice: '',
+    gravy: '',
+    kuttu: '',
+    poriyal: '',
+    rasam: '',
+    more: '',
+    payasam: '',
+    appalam: '',
+    lunch: '',
+    cleanlinessOptions: '',
     additionalComments: ''
   });
+
 
   const [currentDateTime, setCurrentDateTime] = useState('');
   const navigate = useNavigate();
@@ -43,26 +68,10 @@ const LunchFeedbackForm = () => {
     setCurrentDateTime(formatDateTime());
   }, []);
 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'categories') {
-      setFormData({ ...formData, categories: [value] });
-    } else if (name === 'mainDish' || name === 'sideDish') {
-      const updatedDishes = formData[name].includes(value)
-        ? formData[name].filter(dish => dish !== value)
-        : [...formData[name], value];
-      setFormData({ ...formData, [name]: updatedDishes });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
-  };
-
-  const handleStarRating = (dishType, rating) => {
-    if (dishType === 'main') {
-      setFormData({ ...formData, mainDishRating: rating });
-    } else if (dishType === 'side') {
-      setFormData({ ...formData, sideDishRating: rating });
-    }
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
@@ -70,25 +79,25 @@ const LunchFeedbackForm = () => {
     try {
       const currentDate = new Date();
       await addDoc(collection(db, 'lunchFeedback'), { ...formData, date: currentDate });
-      alert('lunchFeedback feedback submitted successfully');
+      alert('Lunch feedback submitted successfully');
 
       // Navigate to home page after successful submission
       navigate('/');
       setFormData({
-        
+        mealType: 'VEG',
         date: '',
-        categories: [],
+        categories: '',
         hospitality: '',
-        rice: [],
-        gravy: [],
-        kuttu: [],
-        poriyal: [],
-        rasam: [],
-        more: [],
-        payasam: [],
-        appalam: [],
-        lunch: [],
-        cleanliness: [],
+        rice: '',
+        gravy: '',
+        kuttu: '',
+        poriyal: '',
+        rasam: '',
+        more: '',
+        payasam: '',
+        appalam: '',
+        lunch: '',
+        cleanlinessOptions: '',
         additionalComments: ''
       });
     } catch (error) {
@@ -96,6 +105,60 @@ const LunchFeedbackForm = () => {
       alert('There was an error submitting your feedback.');
     }
   };
+
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   if (name === 'categories') {
+  //     setFormData({ ...formData, categories: [value] });
+  //   } else if (name === 'mainDish' || name === 'sideDish') {
+  //     const updatedDishes = formData[name].includes(value)
+  //       ? formData[name].filter(dish => dish !== value)
+  //       : [...formData[name], value];
+  //     setFormData({ ...formData, [name]: updatedDishes });
+  //   } else {
+  //     setFormData({ ...formData, [name]: value });
+  //   }
+  // };
+
+  // const handleStarRating = (dishType, rating) => {
+  //   if (dishType === 'main') {
+  //     setFormData({ ...formData, mainDishRating: rating });
+  //   } else if (dishType === 'side') {
+  //     setFormData({ ...formData, sideDishRating: rating });
+  //   }
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const currentDate = new Date();
+  //     await addDoc(collection(db, 'lunchFeedback'), { ...formData, date: currentDate });
+  //     alert('lunchFeedback feedback submitted successfully');
+
+  //     // Navigate to home page after successful submission
+  //     navigate('/');
+  //     setFormData({
+        
+  //       date: '',
+  //       categories: [],
+  //       hospitality: '',
+  //       rice: [],
+  //       gravy: [],
+  //       kuttu: [],
+  //       poriyal: [],
+  //       rasam: [],
+  //       more: [],
+  //       payasam: [],
+  //       appalam: [],
+  //       lunch: [],
+  //       cleanlinessOptions:[],
+  //       additionalComments: ''
+  //     });
+  //   } catch (error) {
+  //     console.error('Error submitting feedback', error);
+  //     alert('There was an error submitting your feedback.');
+  //   }
+  // };
 
   // Options
   const categories = ['SJJ STAFF', 'GUEST', 'ERECTOR/SERVICE ENGINEER', 'AUDITOR', 'OTHERS'];
@@ -155,13 +218,13 @@ const LunchFeedbackForm = () => {
                     <input
                       type="radio"
                       className="form-check-input"
-                      id={`category-${index}`}
+                      id={`categories-${index}`}
                       name="categories"
                       value={category}
                       checked={formData.categories.includes(category)}
                       onChange={handleChange}
                     />
-                    <label className="form-check-label" htmlFor={`category-${index}`}>
+                    <label className="form-check-label" htmlFor={`categories-${index}`}>
                       {category}
                     </label>
                   </div>
@@ -506,3 +569,411 @@ const LunchFeedbackForm = () => {
 };
 
 export default LunchFeedbackForm;
+
+
+// import React, { useState, useEffect } from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import { db } from './firebaseConfig';
+// import { collection, addDoc } from 'firebase/firestore';
+// import './StarRating.css';
+
+// const LunchFeedbackForm = () => {
+//   const [formData, setFormData] = useState({
+//     mealType: 'VEG',
+//     date: '',
+//     categories: '',
+//     hospitality: '',
+//     rice: '',
+//     gravy: '',
+//     kuttu: '',
+//     poriyal: '',
+//     rasam: '',
+//     more: '',
+//     payasam: '',
+//     appalam: '',
+//     lunch: '',
+//     cleanlinessOptions: '',
+//     additionalComments: ''
+//   });
+
+//   const [currentDateTime, setCurrentDateTime] = useState('');
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     // Function to format the current date and time
+//     const formatDateTime = () => {
+//       const date = new Date();
+//       const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+//       const day = dayNames[date.getDay()];
+//       const dayFormatted = String(date.getDate()).padStart(2, '0');
+//       const monthFormatted = String(date.getMonth() + 1).padStart(2, '0');
+//       const year = date.getFullYear();
+//       const hoursFormatted = String(date.getHours()).padStart(2, '0');
+//       const minutesFormatted = String(date.getMinutes()).padStart(2, '0');
+//       const secondsFormatted = String(date.getSeconds()).padStart(2, '0');
+
+//       return `${dayFormatted}-${monthFormatted}-${year} ${hoursFormatted}:${minutesFormatted}:${secondsFormatted} ${day}`;
+//     };
+
+//     // Set the current date and time when the component mounts
+//     setCurrentDateTime(formatDateTime());
+//   }, []);
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData({ ...formData, [name]: value });
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       const currentDate = new Date();
+//       await addDoc(collection(db, 'lunchFeedback'), { ...formData, date: currentDate });
+//       alert('Lunch feedback submitted successfully');
+
+//       // Navigate to home page after successful submission
+//       navigate('/');
+//       setFormData({
+//         mealType: 'VEG',
+//         date: '',
+//         categories: '',
+//         hospitality: '',
+//         rice: '',
+//         gravy: '',
+//         kuttu: '',
+//         poriyal: '',
+//         rasam: '',
+//         more: '',
+//         payasam: '',
+//         appalam: '',
+//         lunch: '',
+//         cleanlinessOptions: '',
+//         additionalComments: ''
+//       });
+//     } catch (error) {
+//       console.error('Error submitting feedback', error);
+//       alert('There was an error submitting your feedback.');
+//     }
+//   };
+
+//   // Options
+//   const categories = ['SJJ STAFF', 'GUEST', 'ERECTOR/SERVICE ENGINEER', 'AUDITOR', 'OTHERS'];
+//   const hospitalityOptions = ['AVERAGE - சுமார்', 'POOR - மோசம்', 'GOOD - நன்று', 'EXCELLENT - அருமை'];
+//   const riceOptions = ['THE RICE WAS GOOD- சாதம் நன்றாக இருந்தது', 'NOT COOKED PROPERLY-சரியாக வேகவில்லை', 'HIGH/LOW SALT - உப்பு அதிகம்/குறைவு', 'THE RICE IS SPOILED - சாதம் குலைந்துவிட்டது'];
+//   const gravyOptions = ['IT WAS AVERAGE- சுமாராக இருந்தது', 'TOO SPICY-காரம் அதிகம்', 'HIGH/LOW SALT - உப்பு அதிகம்/குறைவு', 'GOOD - நன்றாக இருந்தது'];
+//   const kuttuOptions = ['AVERAGE- சுமாராக இருந்தது', 'SMELLED SPICY/TOO SPICY- மசால் வாசம் வந்தது/ காரம் அதிகம்', 'HIGH/LOW SALT- உப்பு அதிகம்/குறைவு', 'GOOD- நன்றாக இருந்தது'];
+//   const poriyalOptions = ['AVERAGE- சுமாராக இருந்தது', 'HIGH/LOW SALT- உப்பு அதிகம்/குறைவு', 'EXCESS COCONUT -தேங்காய் கலவை அதிகம்', 'GOOD -நன்றாக இருந்தது'];
+//   const rasamOptions = ['IT WAS AVERAGE- சுமாராக இருந்தது', 'TOO SPICY-காரம் அதிகம்', 'HIGH/LOW SALT - உப்பு அதிகம்/குறைவு', 'GOOD - நன்றாக இருந்தது'];
+//   const moreOptions = ['IT WAS AVERAGE- சுமாராக இருந்தது', 'TOO SOUR-புளிப்பு  அதிகம் ', 'HIGH/LOW SALT - உப்பு அதிகம்/குறைவு', 'GOOD - நன்றாக இருந்தது'];
+//   const payasamOptions = ['GOOD- நன்றாக இருந்தது', 'AVERAGE-சுமாராக இருந்தது', 'TODAY NIL- இன்று பாயசம் கேன்டீனில் வைக்கவில்லை'];
+//   const appalamOptions = ['LOT OF OIL- எண்ணெய் அதிகம்', 'NOT FRIED WELL- நன்றாக வறுக்கவில்லை', 'AVERAGE- சுமாராக இருந்தது ', 'GOOD- நன்றாக இருந்தது'];
+//   const lunchOptions = ['AVERAGE - சுமாராக', 'POOR - மோசம்', 'GOOD - நன்று', 'EXCELLENT - அருமை'];
+//   const cleanlinessOptions = ['AVERAGE - சுமாராக', 'POOR - மோசம்', 'GOOD - நன்று', 'EXCELLENT - அருமை'];
+
+//   return (
+//     <div className="container my-4">
+//       <div className="card">
+//         <div className="card-header bg-primary text-white">
+//           <h6 className="card-title mb-0 text-center fw-bold">LUNCH FEEDBACK FORM</h6>
+//         </div>
+//         <div className="card-body">
+//           <h6 className="text-center fw-bold bg-light text-dark">{currentDateTime}</h6>
+//           <form onSubmit={handleSubmit}>
+//             {/* Category */}
+//             <div className="card mb-3 border-secondary">
+//               <div className="card-body">
+//                 <label className="form-label"><strong>VISITORS CATEGORY</strong></label>
+//                 {categories.map((category, index) => (
+//                   <div key={index} className="form-check">
+//                     <input
+//                       type="radio"
+//                       className="form-check-input"
+//                       id={`categories-${index}`}
+//                       name="categories"
+//                       value={category}
+//                       checked={formData.categories === category}
+//                       onChange={handleChange}
+//                     />
+//                     <label className="form-check-label" htmlFor={`categories-${index}`}>
+//                       {category}
+//                     </label>
+//                   </div>
+//                 ))}
+//               </div>
+//             </div>
+
+//             {/* Hospitality */}
+//             <div className="card mb-3 border-secondary">
+//               <div className="card-body">
+//                 <label className="form-label"><strong>HOW WAS THE SERVICE OF THE CATERERS?</strong></label>
+//                 {hospitalityOptions.map((option, index) => (
+//                   <div key={index} className="form-check">
+//                     <input
+//                       type="radio"
+//                       className="form-check-input"
+//                       id={`hospitality-${option}`}
+//                       name="hospitality"
+//                       value={option}
+//                       checked={formData.hospitality === option}
+//                       onChange={handleChange}
+//                     />
+//                     <label className="form-check-label" htmlFor={`hospitality-${option}`}>
+//                       {option}
+//                     </label>
+//                   </div>
+//                 ))}
+//               </div>
+//             </div>
+
+//             {/* Rice */}
+//             <div className="card mb-3 border-secondary">
+//               <div className="card-body">
+//                 <label className="form-label"><strong>How was the rice?</strong></label>
+//                 {riceOptions.map((option, index) => (
+//                   <div key={index} className="form-check">
+//                     <input
+//                       type="radio"
+//                       className="form-check-input"
+//                       id={`rice-${option}`}
+//                       name="rice"
+//                       value={option}
+//                       checked={formData.rice === option}
+//                       onChange={handleChange}
+//                     />
+//                     <label className="form-check-label" htmlFor={`rice-${option}`}>
+//                       {option}
+//                     </label>
+//                   </div>
+//                 ))}
+//               </div>
+//             </div>
+
+//             {/* Gravy */}
+//             <div className="card mb-3 border-secondary">
+//               <div className="card-body">
+//                 <label className="form-label"><strong>How was the taste of the GRAVY?</strong></label>
+//                 {gravyOptions.map((option, index) => (
+//                   <div key={index} className="form-check">
+//                     <input
+//                       type="radio"
+//                       className="form-check-input"
+//                       id={`gravy-${option}`}
+//                       name="gravy"
+//                       value={option}
+//                       checked={formData.gravy === option}
+//                       onChange={handleChange}
+//                     />
+//                     <label className="form-check-label" htmlFor={`gravy-${option}`}>
+//                       {option}
+//                     </label>
+//                   </div>
+//                 ))}
+//               </div>
+//             </div>
+
+//             {/* Kuttu */}
+//             <div className="card mb-3 border-secondary">
+//               <div className="card-body">
+//                 <label className="form-label"><strong>How was the taste of the KUTTU?</strong></label>
+//                 {kuttuOptions.map((option, index) => (
+//                   <div key={index} className="form-check">
+//                     <input
+//                       type="radio"
+//                       className="form-check-input"
+//                       id={`kuttu-${option}`}
+//                       name="kuttu"
+//                       value={option}
+//                       checked={formData.kuttu === option}
+//                       onChange={handleChange}
+//                     />
+//                     <label className="form-check-label" htmlFor={`kuttu-${option}`}>
+//                       {option}
+//                     </label>
+//                   </div>
+//                 ))}
+//               </div>
+//             </div>
+
+//             {/* Poriyal */}
+//             <div className="card mb-3 border-secondary">
+//               <div className="card-body">
+//                 <label className="form-label"><strong>How was the PORIYAL?</strong></label>
+//                 {poriyalOptions.map((option, index) => (
+//                   <div key={index} className="form-check">
+//                     <input
+//                       type="radio"
+//                       className="form-check-input"
+//                       id={`poriyal-${option}`}
+//                       name="poriyal"
+//                       value={option}
+//                       checked={formData.poriyal === option}
+//                       onChange={handleChange}
+//                     />
+//                     <label className="form-check-label" htmlFor={`poriyal-${option}`}>
+//                       {option}
+//                     </label>
+//                   </div>
+//                 ))}
+//               </div>
+//             </div>
+
+//             {/* Rasam */}
+//             <div className="card mb-3 border-secondary">
+//               <div className="card-body">
+//                 <label className="form-label"><strong>How was the RASAM?</strong></label>
+//                 {rasamOptions.map((option, index) => (
+//                   <div key={index} className="form-check">
+//                     <input
+//                       type="radio"
+//                       className="form-check-input"
+//                       id={`rasam-${option}`}
+//                       name="rasam"
+//                       value={option}
+//                       checked={formData.rasam === option}
+//                       onChange={handleChange}
+//                     />
+//                     <label className="form-check-label" htmlFor={`rasam-${option}`}>
+//                       {option}
+//                     </label>
+//                   </div>
+//                 ))}
+//               </div>
+//             </div>
+
+//             {/* More */}
+//             <div className="card mb-3 border-secondary">
+//               <div className="card-body">
+//                 <label className="form-label"><strong>How was the MORE?</strong></label>
+//                 {moreOptions.map((option, index) => (
+//                   <div key={index} className="form-check">
+//                     <input
+//                       type="radio"
+//                       className="form-check-input"
+//                       id={`more-${option}`}
+//                       name="more"
+//                       value={option}
+//                       checked={formData.more === option}
+//                       onChange={handleChange}
+//                     />
+//                     <label className="form-check-label" htmlFor={`more-${option}`}>
+//                       {option}
+//                     </label>
+//                   </div>
+//                 ))}
+//               </div>
+//             </div>
+
+//             {/* Payasam */}
+//             <div className="card mb-3 border-secondary">
+//               <div className="card-body">
+//                 <label className="form-label"><strong>How was the PAYASAM?</strong></label>
+//                 {payasamOptions.map((option, index) => (
+//                   <div key={index} className="form-check">
+//                     <input
+//                       type="radio"
+//                       className="form-check-input"
+//                       id={`payasam-${option}`}
+//                       name="payasam"
+//                       value={option}
+//                       checked={formData.payasam === option}
+//                       onChange={handleChange}
+//                     />
+//                     <label className="form-check-label" htmlFor={`payasam-${option}`}>
+//                       {option}
+//                     </label>
+//                   </div>
+//                 ))}
+//               </div>
+//             </div>
+
+//             {/* Appalam */}
+//             <div className="card mb-3 border-secondary">
+//               <div className="card-body">
+//                 <label className="form-label"><strong>How was the APPALAM?</strong></label>
+//                 {appalamOptions.map((option, index) => (
+//                   <div key={index} className="form-check">
+//                     <input
+//                       type="radio"
+//                       className="form-check-input"
+//                       id={`appalam-${option}`}
+//                       name="appalam"
+//                       value={option}
+//                       checked={formData.appalam === option}
+//                       onChange={handleChange}
+//                     />
+//                     <label className="form-check-label" htmlFor={`appalam-${option}`}>
+//                       {option}
+//                     </label>
+//                   </div>
+//                 ))}
+//               </div>
+//             </div>
+
+//             {/* Lunch Overall Feedback */}
+//             <div className="card mb-3 border-secondary">
+//               <div className="card-body">
+//                 <label className="form-label"><strong>Overall Feedback on LUNCH:</strong></label>
+//                 {lunchOptions.map((option, index) => (
+//                   <div key={index} className="form-check">
+//                     <input
+//                       type="radio"
+//                       className="form-check-input"
+//                       id={`lunch-${option}`}
+//                       name="lunch"
+//                       value={option}
+//                       checked={formData.lunch === option}
+//                       onChange={handleChange}
+//                     />
+//                     <label className="form-check-label" htmlFor={`lunch-${option}`}>
+//                       {option}
+//                     </label>
+//                   </div>
+//                 ))}
+//               </div>
+//             </div>
+
+//             {/* Cleanliness */}
+//             <div className="card mb-3 border-secondary">
+//               <div className="card-body">
+//                 <label className="form-label"><strong>Cleanliness of the Area:</strong></label>
+//                 {cleanlinessOptions.map((option, index) => (
+//                   <div key={index} className="form-check">
+//                     <input
+//                       type="radio"
+//                       className="form-check-input"
+//                       id={`cleanliness-${option}`}
+//                       name="cleanlinessOptions"
+//                       value={option}
+//                       checked={formData.cleanlinessOptions === option}
+//                       onChange={handleChange}
+//                     />
+//                     <label className="form-check-label" htmlFor={`cleanliness-${option}`}>
+//                       {option}
+//                     </label>
+//                   </div>
+//                 ))}
+//               </div>
+//             </div>
+
+//             {/* Additional Comments */}
+//             <div className="form-group mb-3">
+//               <label htmlFor="additionalComments" className="form-label"><strong>Additional Comments:</strong></label>
+//               <textarea
+//                 id="additionalComments"
+//                 className="form-control"
+//                 rows="3"
+//                 name="additionalComments"
+//                 value={formData.additionalComments}
+//                 onChange={handleChange}
+//               />
+//             </div>
+
+//             <button type="submit" className="btn btn-primary">Submit Feedback</button>
+//           </form>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default LunchFeedbackForm;

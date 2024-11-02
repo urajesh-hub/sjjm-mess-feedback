@@ -54,7 +54,7 @@ const App = () => {
     if (day === 'Wednesday') {
       navigate('/lunch-veg-nonveg');
     } 
-    if (day === 'Saturday'){
+    else if (day === 'Saturday'){
       navigate('/lunch-sat-veg'); // Navigate to LunchFeedbackForm if Satuday
     }
     else {

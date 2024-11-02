@@ -6,8 +6,9 @@ import './StarRating.css';
 
 const NonVegFeedback = () => {
   const [formData, setFormData] = useState({
+    mealType: 'NON-VEG',
     categories: [],
-    rise:[],
+    rice:[],
     mutton:[],
     chicken:[],
     egg:[],
@@ -42,18 +43,23 @@ const NonVegFeedback = () => {
     setCurrentDateTime(formatDateTime());
   }, []);
 
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   if (name === 'categories') {
+  //     setFormData({ ...formData, categories: [value] });
+  //   } else if (name === 'mainDish' || name === 'sideDish') {
+  //     const updatedDishes = formData[name].includes(value)
+  //       ? formData[name].filter(dish => dish !== value)
+  //       : [...formData[name], value];
+  //     setFormData({ ...formData, [name]: updatedDishes });
+  //   } else {
+  //     setFormData({ ...formData, [name]: value });
+  //   }
+  // };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'categories') {
-      setFormData({ ...formData, categories: [value] });
-    } else if (name === 'mainDish' || name === 'sideDish') {
-      const updatedDishes = formData[name].includes(value)
-        ? formData[name].filter(dish => dish !== value)
-        : [...formData[name], value];
-      setFormData({ ...formData, [name]: updatedDishes });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
@@ -65,8 +71,9 @@ const NonVegFeedback = () => {
        // Navigate to home page after successful submission
        navigate('/');
       setFormData({
+        mealType: 'NON-VEG',
         categories: [],
-        rise:[],
+        rice:[],
         mutton:[],
         chicken:[],
         egg:[],
@@ -85,7 +92,7 @@ const NonVegFeedback = () => {
   // Options for Non-Veg Feedback
   const categories = ['SJJ STAFF', 'GUEST', 'ERECTOR/SERVICE ENGINEER', 'AUDITOR', 'OTHERS'];
   const hospitalityOptions = ['AVERAGE - சுமார்', 'POOR - மோசம்', 'GOOD - நன்று', 'EXCELLENT - அருமை'];
-  const rise = ['THE RICE WAS GOOD- சாதம் நன்றாக இருந்தது', 'NOT COOKED PROPERLY-சரியாக வேகவில்லை', 'HIGH/LOW SALT - உப்பு அதிகம்/குறைவு', 'THE RICE IS SPOILED - சாதம் குலைந்துவிட்டது'];
+  const rice = ['THE RICE WAS GOOD- சாதம் நன்றாக இருந்தது', 'NOT COOKED PROPERLY-சரியாக வேகவில்லை', 'HIGH/LOW SALT - உப்பு அதிகம்/குறைவு', 'THE RICE IS SPOILED - சாதம் குலைந்துவிட்டது'];
   const mutton = ['IT WAS AVERAGE- சுமாராக இருந்தது', 'TOO SPICY-காரம் அதிகம்', 'HIGH/LOW SALT - உப்பு அதிகம்/குறைவு', 'GOOD - நன்றாக இருந்தது'];
   const chicken = ['IT WAS AVERAGE- சுமாராக இருந்தது', 'TOO SPICY-காரம் அதிகம்', 'HIGH/LOW SALT - உப்பு அதிகம்/குறைவு', 'GOOD - நன்றாக இருந்தது'];
   const egg = ['IT WAS AVERAGE- சுமாராக இருந்தது', 'TOO SPICY-காரம் அதிகம்', 'HIGH/LOW SALT - உப்பு அதிகம்/குறைவு', 'GOOD - நன்றாக இருந்தது'];
@@ -165,23 +172,23 @@ const NonVegFeedback = () => {
             {/* Rising */}
             <div className="card mb-3 border-secondary">
               <div className="card-body">
-              <img src="/images/non-veg/non-veg-meal.jpg" alt="rise" className="card-img-top mb-2" />
+              <img src="/images/non-veg/non-veg-meal.jpg" alt="rice" className="card-img-top mb-2" />
               <label className="form-label " style={{ textTransform: "uppercase" }}><strong>How was the rice ? </strong>  
                 <p className='mt-1' style={{ fontSize: '0.9rem' }}>அரிசி சாதம் எவ்வாறு இருந்தது?</p> 
                 </label>
                
-                {rise.map((dish, index) => (
+                {rice.map((dish, index) => (
                   <div key={index} className="form-check">
                     <input
                       type="checkbox"
                       className="form-check-input"
-                      id={`rise-${dish}`}
-                      name="rise"
+                      id={`rice-${dish}`}
+                      name="rice"
                       value={dish}
-                      checked={formData.rise.includes(dish)}
+                      checked={formData.rice.includes(dish)}
                       onChange={handleChange}
                     />
-                    <label className="form-check-label" style={{ fontSize: '0.9rem',marginBottom: '0.01rem' }}htmlFor={`rise-${dish}`}>
+                    <label className="form-check-label" style={{ fontSize: '0.9rem',marginBottom: '0.01rem' }}htmlFor={`rice-${dish}`}>
                       {dish}
                     </label>
                   </div>
