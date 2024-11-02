@@ -95,11 +95,11 @@ const DinnerFeedbackForm = () => {
   };
 
   // Options
-  const mainDishes = ['CHAPATHI- சப்பாத்தி', 'ADAI DOSA- அடை தோசை', 'DOSA- தோசை', 'WHEAT DOSA- கோதுமை தோசை', 'IDLY- இட்லி',];
-  const sideDishes = [ 'SAMBAR- சாம்பார்', 'KURUMA- குருமா', 'TOMATO CHUTNEY- தக்காளி சட்னி', 'COCONUT CHUTNEY- தேங்காய் சட்னி'];
-  const categories = ['SJJ STAFF', 'GUEST', 'ERECTOR/SERVICE ENGINEER', 'AUDITOR', 'OTHERS'];;
-  const hospitalityOptions = ['AVERAGE - சுமார்', 'POOR - மோசம்', 'GOOD - நன்று', 'EXCELLENT - அருமை'];
-  const cleanlinessOptions = ['AVERAGE - சுமார்', 'POOR - மோசம்', 'GOOD - நன்று', 'EXCELLENT - அருமை'];
+  const mainDishes = ['சப்பாத்தி', 'அடை தோசை', 'தோசை', 'கோதுமை தோசை', 'இட்லி', ];
+  const sideDishes = [ 'சாம்பார்', 'குருமா','தக்காளி சட்னி','தேங்காய் சட்னி'];
+  const categories = ['SJJ- Staff', 'Guest', 'Erector/Service Engineer', 'Auditor', 'Others'];
+  const hospitalityOptions = ['சுமார்', 'மோசம்', 'நன்று', 'அருமை'];
+  const cleanlinessOptions = ['சுமார்', 'மோசம்', 'நன்று', 'அருமை'];
 
   return (
     <div className="container my-4 ">

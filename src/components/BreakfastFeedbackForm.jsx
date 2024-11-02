@@ -96,12 +96,11 @@ navigate('/')
   };
 
   // Options
-  const mainDishes = ['APPAM- ஆப்பம்', 'PURI- பூரி', 'DOSA- தோசை', 'WHEAT DOSA- கோதுமை தோசை', 'IDLY- இட்லி', 'WHITE PONGAL- வெண் பொங்கல்'];
-  const sideDishes = ['COCONUT MILK- தேங்காய் பால்', 'SAMBAR- சாம்பார்', 'KURUMA- குருமா', 'TOMATO CHUTNEY- தக்காளி சட்னி', 'COCONUT CHUTNEY- தேங்காய் சட்னி', 'VADAI- வடை'];
-  const categories = ['SJJ STAFF', 'GUEST', 'ERECTOR/SERVICE ENGINEER', 'AUDITOR', 'OTHERS'];
-  const hospitalityOptions = ['AVERAGE - சுமார்', 'POOR - மோசம்', 'GOOD - நன்று', 'EXCELLENT - அருமை'];
-  const cleanlinessOptions = ['AVERAGE - சுமார்', 'POOR - மோசம்', 'GOOD - நன்று', 'EXCELLENT - அருமை'];
-
+  const mainDishes = ['ஆப்பம்', 'பூரி', 'தோசை', 'கோதுமை தோசை', 'இட்லி', 'வெண் பொங்கல்'];
+  const sideDishes = ['தேங்காய் பால்', 'சாம்பார்', 'குருமா','தக்காளி சட்னி','தேங்காய் சட்னி','வடை'];
+  const categories = ['SJJ- Staff', 'Guest', 'Erector/Service Engineer', 'Auditor', 'Others'];
+  const hospitalityOptions = ['சுமார்', 'மோசம்', 'நன்று', 'அருமை'];
+  const cleanlinessOptions = ['சுமார்', 'மோசம்', 'நன்று', 'அருமை'];
 
   return (
     <div className="container my-4 ">
