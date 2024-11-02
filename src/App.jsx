@@ -17,7 +17,7 @@ const App = () => {
     const [activeMeal, setActiveMeal] = useState(null);
   const [selectedMealType, setSelectedMealType] = useState('All');
   const [enabledButton, setEnabledButton] = useState('');
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
     useEffect(() => {
     const checkTimeForMeal = () => {
