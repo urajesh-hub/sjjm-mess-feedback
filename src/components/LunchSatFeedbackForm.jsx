@@ -92,7 +92,7 @@ const LunchSatFeedbackForm = () => {
   const categories = ['SJJ STAFF', 'GUEST', 'ERECTOR/SERVICE ENGINEER', 'AUDITOR', 'OTHERS'];
   const hospitalityOptions = ['AVERAGE - சுமார்', 'POOR - மோசம்', 'GOOD - நன்று', 'EXCELLENT - அருமை'];
   const prince = ['IT WAS AVERAGE- சுமாராக இருந்தது', 'TOO SPICY-காரம் அதிகம்', 'HIGH/LOW SALT - உப்பு அதிகம்/குறைவு', 'GOOD - நன்றாக இருந்தது'];
-  const rise = ['VEGITABLE BRIYANI- காய்கறி பிரியாணி' ,'TAMARIND- புளியோதரை' ,'LEMON- லெமன் ,TOMATO- தக்காளி' , 'CURD- தயிர்','RAVA KESARI- ரவா கேசரி '];
+  const rise = ['VEGITABLE BRIYANI- காய்கறி பிரியாணி' ,'TAMARIND- புளியோதரை' ,'LEMON- லெமன்' ,'TOMATO- தக்காளி' , 'CURD- தயிர்','RAVA KESARI- ரவா கேசரி '];
   const rating = ['THE RICE WAS GOOD- சாதம் நன்றாக இருந்தது', 'NOT COOKED PROPERLY-சரியாக வேகவில்லை', 'HIGH/LOW SALT - உப்பு அதிகம்/குறைவு', 'THE RICE IS SPOILED - சாதம் குலைந்துவிட்டது'];
   const mutton = ['IT WAS AVERAGE- சுமாராக இருந்தது', 'TOO SPICY-காரம் அதிகம்', 'HIGH/LOW SALT - உப்பு அதிகம்/குறைவு', 'GOOD - நன்றாக இருந்தது'];
   const chicken = ['IT WAS AVERAGE- சுமாராக இருந்தது', 'TOO SPICY-காரம் அதிகம்', 'HIGH/LOW SALT - உப்பு அதிகம்/குறைவு', 'GOOD - நன்றாக இருந்தது'];
