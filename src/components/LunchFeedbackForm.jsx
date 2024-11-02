@@ -1,4 +1,5 @@
 import React, { useState,useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { db } from './firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore';
 import './StarRating.css';
@@ -19,6 +20,7 @@ const LunchFeedbackForm = () => {
   });
 
   const [currentDateTime, setCurrentDateTime] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Function to format the current date and time
@@ -69,6 +71,9 @@ const LunchFeedbackForm = () => {
       const currentDate = new Date();
       await addDoc(collection(db, 'lunchFeedback'), { ...formData, date: currentDate });
       alert('lunchFeedback feedback submitted successfully');
+
+      // Navigate to home page after successful submission
+      navigate('/');
       setFormData({
         
         date: '',
@@ -93,7 +98,7 @@ const LunchFeedbackForm = () => {
   };
 
   // Options
-  const categories = ['COMPANY STAFF', 'GUEST', 'ERECTOR/SERVICE ENGINEER', 'AUDITOR', 'OTHERS'];
+  const categories = ['SJJ STAFF', 'GUEST', 'ERECTOR/SERVICE ENGINEER', 'AUDITOR', 'OTHERS'];
   const hospitalityOptions = ['AVERAGE - சுமார்', 'POOR - மோசம்', 'GOOD - நன்று', 'EXCELLENT - அருமை'];
   const rice = ['THE RICE WAS GOOD- சாதம் நன்றாக இருந்தது', 'NOT COOKED PROPERLY-சரியாக வேகவில்லை', 'HIGH/LOW SALT - உப்பு அதிகம்/குறைவு', 'THE RICE IS SPOILED - சாதம் குலைந்துவிட்டது'];
   const gravy = ['IT WAS AVERAGE- சுமாராக இருந்தது', 'TOO SPICY-காரம் அதிகம்', 'HIGH/LOW SALT - உப்பு அதிகம்/குறைவு', 'GOOD - நன்றாக இருந்தது'];
@@ -194,8 +199,8 @@ const LunchFeedbackForm = () => {
 
             {/* Rising */}
             <div className="card mb-3 border-secondary">
+             <div className="card-body">
               <img src="/images/rice.jpg" alt="rice" className="card-img-top" />
-              <div className="card-body">
               <label className="form-label " style={{ textTransform: "uppercase" }}><strong>How was the rice ? </strong>  
                 <p className='mt-1' style={{ fontSize: '0.9rem' }}>அரிசி சாதம் எவ்வாறு இருந்தது?</p> 
                 </label>

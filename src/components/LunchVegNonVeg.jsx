@@ -18,7 +18,7 @@ const LunchVegNonVeg = () => {
                         <div className="card" style={{ width: '100%',padding:'5px' }}>
                             <img src="/images/vegmeal.jpg " className="card-img-top bg-light " alt="Main Dish" />
                             <div className="card-body">
-                                <h6 className="card-title bg-primary text-white">VEG MEALS</h6>
+                                <h6 className="card-title bg-primary text-white">VEG</h6>
                                 <p className="card-text">Share your Feedback for the Vegetarian Option.</p>
                                 <Link to="/wed-veg-lunch" className="btn btn-primary btn-sm">CLICK HERE</Link>
                             </div>
@@ -28,7 +28,7 @@ const LunchVegNonVeg = () => {
                         <div className="card" style={{ width: '100%',padding:'5px' }}>
                         <img src="/images/non-veg.jpg " className="card-img-top bg-light" alt="Main Dish" />
                             <div className="card-body">
-                                <h6 className="card-title bg-primary text-white ">NON-VEG MEAL</h6>
+                                <h6 className="card-title bg-primary text-white ">NON-VEG</h6>
                                 <p className="card-text">Share your feedback for the Non-Vegetarian Option.</p>
                                 <Link to="/non-veg-feedback" className="btn btn-primary btn-sm">CLICK HERE</Link>
                             </div>

@@ -4,16 +4,18 @@ import { db } from './firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore';
 import './StarRating.css';
 
-const NonVegFeedback = () => {
+const LunchSatFeedbackForm = () => {
   const [formData, setFormData] = useState({
     categories: [],
+    prince:[],
     rise:[],
-    mutton:[],
-    chicken:[],
-    egg:[],
+    rating:[],
+    // mutton:[],
+    // chicken:[],
+    // egg:[],
     hospitalityOptions:[],
-    mainDish: [],
-    sideDish: [],
+    // mainDish: [],
+    // sideDish: [],
     cleanlinessOptions:[],
     additionalComments: ''
   });
@@ -46,33 +48,37 @@ const NonVegFeedback = () => {
     const { name, value } = e.target;
     if (name === 'categories') {
       setFormData({ ...formData, categories: [value] });
-    } else if (name === 'mainDish' || name === 'sideDish') {
-      const updatedDishes = formData[name].includes(value)
-        ? formData[name].filter(dish => dish !== value)
-        : [...formData[name], value];
-      setFormData({ ...formData, [name]: updatedDishes });
-    } else {
+    // } else if (name === 'mainDish' || name === 'sideDish') {
+    //   const updatedDishes = formData[name].includes(value)
+    //     ? formData[name].filter(dish => dish !== value)
+    //     : [...formData[name], value];
+    //   setFormData({ ...formData, [name]: updatedDishes });
+    // } else {
       setFormData({ ...formData, [name]: value });
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    
     try {
       const currentDate = new Date();
-      await addDoc(collection(db, 'nonVegFeedback'), { ...formData, date: currentDate });
-      alert('Non-Vegetarian feedback submitted successfully');
+      await addDoc(collection(db, 'LunchSatFeedbackForm'), { ...formData, date: currentDate });
+      alert('Lunch feedback submitted successfully');
        // Navigate to home page after successful submission
        navigate('/');
       setFormData({
         categories: [],
+        prince:[],
         rise:[],
-        mutton:[],
-        chicken:[],
-        egg:[],
+        rating:[],
+        // mutton:[],
+        // chicken:[],
+        // egg:[],
         hospitalityOptions:[],
-        mainDish: [],
-        sideDish: [],
+        // mainDish: [],
+        // sideDish: [],
         cleanlinessOptions:[],
         additionalComments: ''
       });
@@ -85,7 +91,9 @@ const NonVegFeedback = () => {
   // Options for Non-Veg Feedback
   const categories = ['SJJ STAFF', 'GUEST', 'ERECTOR/SERVICE ENGINEER', 'AUDITOR', 'OTHERS'];
   const hospitalityOptions = ['AVERAGE - சுமார்', 'POOR - மோசம்', 'GOOD - நன்று', 'EXCELLENT - அருமை'];
-  const rise = ['THE RICE WAS GOOD- சாதம் நன்றாக இருந்தது', 'NOT COOKED PROPERLY-சரியாக வேகவில்லை', 'HIGH/LOW SALT - உப்பு அதிகம்/குறைவு', 'THE RICE IS SPOILED - சாதம் குலைந்துவிட்டது'];
+  const prince = ['IT WAS AVERAGE- சுமாராக இருந்தது', 'TOO SPICY-காரம் அதிகம்', 'HIGH/LOW SALT - உப்பு அதிகம்/குறைவு', 'GOOD - நன்றாக இருந்தது'];
+  const rise = ['VEGITABLE BRIYANI- காய்கறி பிரியாணி' ,'TAMARIND- புளியோதரை' ,'LEMON- லெமன் ,TOMATO- தக்காளி' , 'CURD- தயிர்','RAVA KESARI- ரவா கேசரி '];
+  const rating = ['THE RICE WAS GOOD- சாதம் நன்றாக இருந்தது', 'NOT COOKED PROPERLY-சரியாக வேகவில்லை', 'HIGH/LOW SALT - உப்பு அதிகம்/குறைவு', 'THE RICE IS SPOILED - சாதம் குலைந்துவிட்டது'];
   const mutton = ['IT WAS AVERAGE- சுமாராக இருந்தது', 'TOO SPICY-காரம் அதிகம்', 'HIGH/LOW SALT - உப்பு அதிகம்/குறைவு', 'GOOD - நன்றாக இருந்தது'];
   const chicken = ['IT WAS AVERAGE- சுமாராக இருந்தது', 'TOO SPICY-காரம் அதிகம்', 'HIGH/LOW SALT - உப்பு அதிகம்/குறைவு', 'GOOD - நன்றாக இருந்தது'];
   const egg = ['IT WAS AVERAGE- சுமாராக இருந்தது', 'TOO SPICY-காரம் அதிகம்', 'HIGH/LOW SALT - உப்பு அதிகம்/குறைவு', 'GOOD - நன்றாக இருந்தது'];
@@ -97,8 +105,8 @@ const NonVegFeedback = () => {
     <div className="container my-4">
       <div className="card">
         
-        <div className="card-header bg-danger text-white">
-          <h6 className="card-title mb-0 text-center fw-bold">NON-VEGETARIAN FEEDBACK FORM</h6>
+        <div className="card-header bg-primary bg-opacity-25 ">
+          <h6 className="card-title mb-0 text-center fw-bold">SATURDAY LUNCH FEEDBACK FORM</h6>
         </div>
         <div className="card-body">
           {/* Display Current Date and Time in the desired format */}
@@ -123,7 +131,7 @@ const NonVegFeedback = () => {
                       name="categories"
                       value={dish}
                       checked={formData.categories.includes(dish)}
-                      onChange={handleChange}
+                      onChange={handleChange} required
                     />
                     <label className="form-check-label" style={{ fontSize: '0.9rem',marginBottom: '0.01rem' }}htmlFor={`categories-${dish}`}>
                       {dish}
@@ -152,7 +160,7 @@ const NonVegFeedback = () => {
                       name="hospitalityOptions"
                       value={option}
                       checked={formData.hospitalityOptions === option}
-                      onChange={handleChange} 
+                      onChange={handleChange}  required
                     />
                     <label className="form-check-label "style={{ fontSize: '0.9rem',marginBottom: '0.01rem' }} htmlFor={`hospitalityOptions-${option}`}>
                       {option}
@@ -162,12 +170,39 @@ const NonVegFeedback = () => {
               </div>
             </div>
 
+            {/* Prince */}
+            <div className="card mb-3 border-secondary">
+              <div className="card-body">
+              <img src="images/prince.jpg" alt="prince" className="card-img-top mb-2" />
+              <label className="form-label " style={{ textTransform: "uppercase" }}><strong>How did Prince food taste? </strong>  
+                <p className='mt-1' style={{ fontSize: '0.9rem' }}>பிரின்ஸ்  உணவின் சுவை எவ்வாறு இருந்தது?</p> 
+                </label>
+               
+                {prince.map((dish, index) => (
+                  <div key={index} className="form-check">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id={`prince-${dish}`}
+                      name="prince"
+                      value={prince}
+                      checked={formData.prince.includes(dish)}
+                      onChange={handleChange} required
+                    />
+                    <label className="form-check-label" style={{ fontSize: '0.9rem',marginBottom: '0.01rem' }}htmlFor={`prince-${dish}`}>
+                      {dish}
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {/* Rising */}
             <div className="card mb-3 border-secondary">
               <div className="card-body">
-              <img src="/images/non-veg/non-veg-meal.jpg" alt="rise" className="card-img-top mb-2" />
-              <label className="form-label " style={{ textTransform: "uppercase" }}><strong>How was the rice ? </strong>  
-                <p className='mt-1' style={{ fontSize: '0.9rem' }}>அரிசி சாதம் எவ்வாறு இருந்தது?</p> 
+              <img src="/images/satlunch.jpg" alt="rise" className="card-img-top mb-2" />
+              <label className="form-label " style={{ textTransform: "uppercase" }}><strong>What lunch did you eat? </strong>  
+                <p className='mt-1' style={{ fontSize: '0.9rem' }}>நீங்கள் சாப்பிட்ட மதிய உணவு?</p> 
                 </label>
                
                 {rise.map((dish, index) => (
@@ -179,7 +214,7 @@ const NonVegFeedback = () => {
                       name="rise"
                       value={dish}
                       checked={formData.rise.includes(dish)}
-                      onChange={handleChange}
+                      onChange={handleChange} required
                     />
                     <label className="form-check-label" style={{ fontSize: '0.9rem',marginBottom: '0.01rem' }}htmlFor={`rise-${dish}`}>
                       {dish}
@@ -189,11 +224,39 @@ const NonVegFeedback = () => {
               </div>
             </div>
 
-            {/* Mutton Gravey */}
+            {/* Rating */}
+            <div className="card mb-3 border-secondary">
+              <div className="card-body">
+              <img src="/images/non-feedback.jpg" alt="rise" className="card-img-top mb-2" />
+              <label className="form-label " style={{ textTransform: "uppercase" }}><strong>How did the variety rice  taste? </strong>  
+                <p className='mt-1' style={{ fontSize: '0.9rem' }}>மதிய உணவின் சுவை எவ்வாறு இருந்தது?</p> 
+                </label>
+               
+                {rating.map((dish, index) => (
+                  <div key={index} className="form-check">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id={`rating-${dish}`}
+                      name="rating"
+                      value={dish}
+                      checked={formData.rating.includes(dish)}
+                      onChange={handleChange} required
+                    />
+                    <label className="form-check-label" style={{ fontSize: '0.9rem',marginBottom: '0.01rem' }}htmlFor={`rating-${dish}`}>
+                      {dish}
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+
+            {/* Mutton Gravey
             <div className="card mb-3 border-secondary">
               <div className="card-body">
               <img src="/images/non-veg/non-veg-mutton1.jpg" alt="mutton" className="card-img-top mb-2" />
-              <label className="form-label " style={{ textTransform: "uppercase" }}><strong>How did the Non-Veg gravy (mutton, Chicken, egg) taste ? </strong>  
+              <label className="form-label " style={{ textTransform: "uppercase" }}><strong>How did the variety rice dish (vegetable biryani, tamarind, lemon, tomato, curd and rava kesari) taste? </strong>  
                 <p className='mt-1' style={{ fontSize: '0.9rem' }}>அசைவ குழம்பின் (மட்டன், சிக்கன், முட்டை) சுவை எவ்வாறு இருந்தது ?</p> 
                 </label>
                
@@ -214,7 +277,7 @@ const NonVegFeedback = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
 
             {/* Chicken Gravey */}
             {/* <div className="card mb-3 border-secondary">
@@ -336,7 +399,7 @@ const NonVegFeedback = () => {
                       name="cleanlinessOptions"
                       value={option}
                       checked={formData.cleanlinessOptions === option}
-                      onChange={handleChange} 
+                      onChange={handleChange} required  
                     />
                     <label className="form-check-label "style={{ fontSize: '0.9rem',marginBottom: '0.01rem' }} htmlFor={`cleanlinessOptions-${option}`}>
                       {option}
@@ -350,7 +413,7 @@ const NonVegFeedback = () => {
             <div className="card mb-3 border-secondary">
               
               <div className="card-body">
-              <img src="/images/non-feedback.jpg" alt="Cleanliness" className="card-img-top mb-2 " />
+              <img src="/images/additional_comments.jpg" alt="Cleanliness" className="card-img-top mb-2 " />
                
                 <label htmlFor="additionalComments" className="form-label " style={{ fontSize: '0.9rem',marginBottom: '0.01rem',textTransform: "uppercase" }}><strong>Please let us know your other improvement ideas and suggestions ? </strong>  
                 <p className='mt-1' style={{ fontSize: '0.8rem' }}>உங்களின் மற்ற மேம்பாட்டு யோசனைகள் மற்றும் பரிந்துரைகளை எங்களுக்குத் தெரிவிக்கவும்</p> 
@@ -360,7 +423,7 @@ const NonVegFeedback = () => {
                   id="additionalComments"
                   name="additionalComments"
                   value={formData.additionalComments}
-                  onChange={handleChange}
+                  onChange={handleChange} required
                 />
               </div>
             </div>
@@ -375,4 +438,4 @@ const NonVegFeedback = () => {
   );
 };
 
-export default NonVegFeedback;
+export default LunchSatFeedbackForm;
